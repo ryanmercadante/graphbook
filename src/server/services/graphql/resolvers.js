@@ -1,4 +1,4 @@
-const posts =[
+let posts =[
   {
     id: 2,
     text: 'Lorem Ipsum',
@@ -22,6 +22,17 @@ const resolvers = {
       return posts
     },
   },
+  RootMutation: {
+    addPost(root, { post, user }, context) {
+      const postObject = {
+        ...post,
+        user,
+        id: posts.length+1
+      }
+      posts.push(postObject)
+      return postObject
+    }
+  }
 };
 
 // The resolvers object holds all types as a property. We set ip RootQuery, holding the posts query in the same way as we did in our schema. The resolvers object must equal the schema but recursively merged.
