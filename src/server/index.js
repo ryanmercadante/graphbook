@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 import compress from 'compression'
 import services from './services'
+import db from './database'
 
 const app = express()
 const root = path.join(__dirname, '../../')
