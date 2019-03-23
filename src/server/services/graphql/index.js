@@ -3,16 +3,16 @@ import { makeExecutableSchema } from 'graphql-tools' // Merges the GraphQL schem
 import Resolvers from './resolvers'
 import Schema from './Schema'
 
-// we are going to pass this as a schema parameter to the Apollo Server
-const executableSchema = makeExecutableSchema({
-  typeDefs: Schema,
-  resolvers: Resolvers
-})
-
-const server = new ApolloServer({
-  schema: executableSchema,
-  context: ({ req }) => req // the context property contains the request object of Express. In our resolver functions, we can access the request if we need to.
-})
-
-// This exports the initialized server object, which handles all GraphQL requests
-export default server
+// We surround everything with a function that accepts the utils object.
+// The aim of all this is to have access to the database within our GraphQL resolvers
+export default (utils) => {
+  const executableSchema = makeExecutableSchema({
+    typeDefs: Schema,
+    resolvers: Resolvers.call(utils), // The scope of the Resolvers is the utils object
+  })
+  const server = new ApolloServer({
+    schema: executableSchema,
+    context: ({ req }) => req
+  })
+  return server
+}
