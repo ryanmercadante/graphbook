@@ -22,9 +22,14 @@ export default function resolver() {
         return postObject
       }
     },
+
+    Post: {
+      user(post, args, context) {
+        return post.getUser()
+      }
+    }
   }
 
-  return resolvers;
 };
 
 // The resolvers object holds all types as a property. We set ip RootQuery, holding the posts query in the same way as we did in our schema. The resolvers object must equal the schema but recursively merged.

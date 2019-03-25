@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // We search for all files ending with .js in the same folder as the current file, and load them all with the require.context statement.
 export default (sequelize) => {
-  ld db = {}
+  let db = {}
 
   const context = require.context('.', true, /^\.\/(?!index\.js).*\.js$/, 'sync')
   context.keys().map(context).forEach(module => {
