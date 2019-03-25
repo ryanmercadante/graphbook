@@ -8,11 +8,13 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Posts', [{
       text: 'Lorem Ipsum 1',
+      userId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
       text: 'Lorem Ipsum 2',
+      userId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }],
